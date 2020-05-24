@@ -104,24 +104,24 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/AddNewEmail", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void AddNewEmail(string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent, bool attachments) {
-            this.Invoke("AddNewEmail", new object[] {
+        public int AddNewEmail(string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent) {
+            object[] results = this.Invoke("AddNewEmail", new object[] {
                         emailName,
                         emailRegistrationDate,
                         emailTo,
                         emailFrom,
                         emailTag,
-                        emailContent,
-                        attachments});
+                        emailContent});
+            return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void AddNewEmailAsync(string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent, bool attachments) {
-            this.AddNewEmailAsync(emailName, emailRegistrationDate, emailTo, emailFrom, emailTag, emailContent, attachments, null);
+        public void AddNewEmailAsync(string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent) {
+            this.AddNewEmailAsync(emailName, emailRegistrationDate, emailTo, emailFrom, emailTag, emailContent, null);
         }
         
         /// <remarks/>
-        public void AddNewEmailAsync(string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent, bool attachments, object userState) {
+        public void AddNewEmailAsync(string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent, object userState) {
             if ((this.AddNewEmailOperationCompleted == null)) {
                 this.AddNewEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddNewEmailOperationCompleted);
             }
@@ -131,14 +131,13 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
                         emailTo,
                         emailFrom,
                         emailTag,
-                        emailContent,
-                        attachments}, this.AddNewEmailOperationCompleted, userState);
+                        emailContent}, this.AddNewEmailOperationCompleted, userState);
         }
         
         private void OnAddNewEmailOperationCompleted(object arg) {
             if ((this.AddNewEmailCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.AddNewEmailCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.AddNewEmailCompleted(this, new AddNewEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -357,8 +356,6 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
         
         private string emailContentField;
         
-        private bool attachmentsField;
-        
         /// <remarks/>
         public int EmailId {
             get {
@@ -428,21 +425,33 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
                 this.emailContentField = value;
             }
         }
-        
-        /// <remarks/>
-        public bool Attachments {
-            get {
-                return this.attachmentsField;
-            }
-            set {
-                this.attachmentsField = value;
-            }
-        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void AddNewEmailCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void AddNewEmailCompletedEventHandler(object sender, AddNewEmailCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AddNewEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AddNewEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]

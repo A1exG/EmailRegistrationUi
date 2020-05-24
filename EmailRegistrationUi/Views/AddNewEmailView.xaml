@@ -5,56 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmailRegistrationUi.Views"
         mc:Ignorable="d"
-        Title="AddNewEmailView" Height="700" Width="800" WindowStyle="None" Foreground="White" Background="#FFA2AABD">
+        Title="" Height="700" Width="800" WindowStyle="None" Foreground="White" Background="#FFA2AABD">
     <Grid>
         <Grid Height="50" VerticalAlignment="Top" Background="#FF727EF3">
-            <TextBlock Text="Регистрация нового сообщения" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="Регистрация нового письма" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
-        <Grid Height="550" Width="610">
+        <Grid Height="550" Width="575">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"></ColumnDefinition>
-                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="270"></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
                 <ColumnDefinition Width="300"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
                 <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
                 <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
                 <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
                 <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="10"></RowDefinition>
-                <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
                 <RowDefinition Height="240"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" x:Name="lblEmailName" FontSize="18" Content="Введите название письма"></Label>
-            <TextBox Grid.Row="0" Grid.Column="2" Name="txtEmailName"></TextBox>
+            <TextBlock Grid.Row="0" Grid.Column="0" x:Name="lblEmailName" FontSize="18" Text="Введите название письма :" TextDecorations="Underline" Background="#FF9DABC9" Foreground="White"></TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="2" Name="txtEmailName" BorderBrush="LightBlue" TextWrapping="Wrap"></TextBox>
 
-            <Label Grid.Row="2" Grid.Column="0" x:Name="lblDateRegistration" FontSize="18" Content="Введите название письма"></Label>
-            <DatePicker Grid.Row="2" Grid.Column="2" x:Name="dpEmailRegistrationDate" FontSize="18"></DatePicker>
+            <TextBlock Grid.Row="2" Grid.Column="0" x:Name="lblDateRegistration" FontSize="18" Text="Введите название письма :" TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>
+            <DatePicker Grid.Row="2" Grid.Column="2" x:Name="dpEmailRegistrationDate" FontSize="18" BorderBrush="LightBlue"></DatePicker>
 
-            <Label Grid.Row="4" Grid.Column="0" x:Name="lblEmailTo" FontSize="18" Content="Введите адресата письма"></Label>
-            <TextBox Grid.Row="4" Grid.Column="2" Name="txtEmailTo"></TextBox>
+            <TextBlock Grid.Row="4" Grid.Column="0" x:Name="lblEmailTo" FontSize="18" Text="Введите адресата письма :" TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>
+            <TextBox Grid.Row="4" Grid.Column="2" Name="txtEmailTo" BorderBrush="LightBlue" TextWrapping="Wrap"></TextBox>
 
-            <Label Grid.Row="6" Grid.Column="0" x:Name="lblEmailFrom" FontSize="18" Content="Введите отправителя письма"></Label>
-            <TextBox Grid.Row="6" Grid.Column="2" Name="txtEmailFrom"></TextBox>
+            <TextBlock Grid.Row="6" Grid.Column="0" x:Name="lblEmailFrom" FontSize="18" Text="Введите отправителя письма :" TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>
+            <TextBox Grid.Row="6" Grid.Column="2" Name="txtEmailFrom" BorderBrush="LightBlue" TextWrapping="Wrap"></TextBox>
 
-            <Label Grid.Row="8" Grid.Column="0" x:Name="lblEmailTag" FontSize="18" Content="Введите тэг письма"></Label>
-            <TextBox Grid.Row="8" Grid.Column="2" Name="txtEmailTag"></TextBox>
+            <TextBlock Grid.Row="8" Grid.Column="0" x:Name="lblEmailTag" FontSize="18" Text="Введите тэг письма :" TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>
+            <TextBox Grid.Row="8" Grid.Column="2" Name="txtEmailTag" BorderBrush="LightBlue" TextWrapping="Wrap"></TextBox>
 
-            <Label Grid.Row="10" Grid.Column="0" x:Name="lblEmailAttachments" FontSize="18" Content="Вложения в пиьсме ( да / нет )"></Label>
-            <CheckBox Grid.Row="10" Grid.Column="2"></CheckBox>
-
-            <Label Grid.Row="12" Grid.Column="0" x:Name="lblEmailContent" FontSize="18" Content="Введите текст письма"></Label>
-            <TextBox Grid.Row="12" Grid.Column="2" Name="txtEmailContent"></TextBox>
+            <TextBlock Grid.Row="10" Grid.Column="0" x:Name="lblEmailContent" FontSize="18" Text="Введите текст письма :" Height="40" VerticalAlignment="Top"  TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>
+            <TextBox Grid.Row="10" Grid.Column="2" Name="txtEmailContent" BorderBrush="LightBlue" TextWrapping="Wrap"></TextBox>
 
         </Grid>
-        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="50" Width="350">
+        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="50" Width="310">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="10"></ColumnDefinition>
@@ -65,8 +60,8 @@
                 <RowDefinition Height="10"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button Grid.Column="0" Grid.Row="0" x:Name="btnSave" Content="Сохранить" Background="#FF727EF3" FontSize="14" Foreground="White"></Button>
-            <Button Grid.Column="2" Grid.Row="0" x:Name="btnClose" Content="Закрыть" Background="#FF727EF3" FontSize="14" Foreground="White"></Button>
+            <Button Grid.Column="0" Grid.Row="0" x:Name="btnSave" BorderBrush="AntiqueWhite" Content="Сохранить" Background="#FF727EF3" FontSize="14" Foreground="White"></Button>
+            <Button Grid.Column="2" Grid.Row="0" x:Name="btnClose" BorderBrush="AntiqueWhite" Content="Закрыть" Background="#FF727EF3" FontSize="14" Foreground="White"></Button>
         </Grid>
     </Grid>
 </Window>

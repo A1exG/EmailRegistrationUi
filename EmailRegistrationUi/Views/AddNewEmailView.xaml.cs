@@ -1,31 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EmailRegistrationUi.Services.Validator;
+using Ninject;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace EmailRegistrationUi.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для AddNewEmailView.xaml
-    /// </summary>
     public partial class AddNewEmailView : Window
     {
-        public AddNewEmailView()
+        public AddNewEmailView(IKernel kernel)
         {
             InitializeComponent();
+            var EmailRegistrationDate = dpEmailRegistrationDate.DisplayDate.Date;
+            EmailRegistrationWebService.WebService webService = new EmailRegistrationWebService.WebService();
 
             btnClose.Click += (s, e) =>
             {
                 this.Close();
+            };
+
+            btnSave.Click += (s, e) =>
+            {
+                Validator validator = kernel.Get<Validator>();
+
+                if (!validator.CheckStringEmpty(txtEmailName))
+                {MessageBox.Show("Поле название на заполнено");}
+                else if (!validator.CheckDateTimeEmpty(dpEmailRegistrationDate))
+                { MessageBox.Show("Поле даты на заполнено"); }
+                else if(!validator.CheckStringEmpty(txtEmailTo))
+                {MessageBox.Show("Поле адресат на заполнено");}
+                else if (!validator.CheckStringEmpty(txtEmailFrom))
+                {MessageBox.Show("Поле отправитель на заполнено");}
+                else if (!validator.CheckStringEmpty(txtEmailTag))
+                {MessageBox.Show("Поле тэг на заполнено");}
+                else if (!validator.CheckStringEmpty(txtEmailTag))
+                {MessageBox.Show("Поле тэг на заполнено");}
+                else if (!validator.CheckStringEmpty(txtEmailContent))
+                {MessageBox.Show("Поле сообщение на заполнено");}
+                else
+                {
+                    var connect = webService.AddNewEmail(txtEmailName.Text, EmailRegistrationDate, txtEmailTo.Text, txtEmailFrom.Text, txtEmailTag.Text, txtEmailContent.Text);
+                    if (connect > 0)
+                    {
+                        MessageBox.Show("Сообщение зарегитрированно!");
+                        this.Close();
+                    }
+                }
             };
         }
     }

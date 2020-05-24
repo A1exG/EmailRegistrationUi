@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmailRegistrationUi.Views"
         mc:Ignorable="d"
-        Title="ShowAllEmailView" Height="450" Width="800">
+        Title="" Height="650" Width="800" WindowStyle="None" Foreground="White" Background="#FFA2AABD">
     <Grid>
+        <Grid Height="50" VerticalAlignment="Top" Background="#FF727EF3">
+            <TextBlock Text="Просмотр всех писем" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+        <Grid Height="auto" Width="auto" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 55 0 0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <DataGrid Grid.Column="1" x:Name="dgEmails" IsReadOnly="True" SelectedCellsChanged="dgEmails_SelectedCellsChanged"  SelectionUnit="FullRow" SelectionMode="Single" Height="300"
+                      Width="auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  ScrollViewer.VerticalScrollBarVisibility="Visible">
+            </DataGrid>
+        </Grid>
+        <Grid VerticalAlignment="Bottom"  HorizontalAlignment="Center" Width="150" Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" Grid.Row="0" x:Name="btnClose" BorderBrush="AntiqueWhite" Content="Закрыть" Background="#FF727EF3" FontSize="14" Foreground="White"></Button>
+        </Grid>
         
     </Grid>
 </Window>

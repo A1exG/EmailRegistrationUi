@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace EmailRegistrationUi.Views
 {
     public partial class ShowEmailInIdView : Window
     {
-        public ShowEmailInIdView()
+        public ShowEmailInIdView(IKernel kernel)
         {
             InitializeComponent();
         }

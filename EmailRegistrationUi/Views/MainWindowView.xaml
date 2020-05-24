@@ -22,9 +22,9 @@
                 <RowDefinition Height="50"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Content="Регистрация нового письма" x:Name="btnAddNewEmail" Background="#FF727EF3" FontSize="14" Foreground="White"></Button>
-            <Button Grid.Row="2" Grid.Column="0" Content="Показать все сообщения" x:Name="btnShowAllEmail" Background="#FF727EF3" FontSize="14" Foreground="White"></Button>
-            <Button Grid.Row="4" Grid.Column="0" Content="Найти письмо по ID" x:Name="btnShowEmailInId" Background="#FF727EF3" FontSize="14" Foreground="White"></Button>
+            <Button Grid.Row="0" Grid.Column="0" Content="Регистрация нового письма" x:Name="btnAddNewEmail"  Background="#FF727EF3" FontSize="14" Foreground="White" BorderBrush="AntiqueWhite"></Button>
+            <Button Grid.Row="2" Grid.Column="0" Content="Показать все письма" x:Name="btnShowAllEmail" Background="#FF727EF3" FontSize="14" Foreground="White" BorderBrush="AntiqueWhite"></Button>
+            <Button Grid.Row="4" Grid.Column="0" Content="Найти письмо по ID" x:Name="btnShowEmailInId" Background="#FF727EF3" FontSize="14" Foreground="White" BorderBrush="AntiqueWhite"></Button>
         </Grid>
     </Grid>
 
