@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace EmailRegistrationUi.Services.Validator
 {
     public class Validator : IValidator
     {
+        // Проверка TextBox на пустое значение
+        // Если не заполнен - контур у элемента в окне красный. 
+        // Если заполнен - контур синий
         public bool CheckStringEmpty(TextBox textBox)
         {
             if (textBox.Text == "")
@@ -24,6 +21,9 @@ namespace EmailRegistrationUi.Services.Validator
             }
         }
 
+        // Проверка DatePicker на пустое значение
+        // Если дата не выбрана - контур у элемента в окне красный. 
+        // Если дата выбрана - контур синий
         public bool CheckDateTimeEmpty(DatePicker datePicker)
         {
             if (datePicker.SelectedDate == null)

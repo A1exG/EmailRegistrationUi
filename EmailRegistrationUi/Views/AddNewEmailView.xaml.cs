@@ -13,11 +13,17 @@ namespace EmailRegistrationUi.Views
             var EmailRegistrationDate = dpEmailRegistrationDate.DisplayDate.Date;
             var webService = kernel.Get<WebService>();
 
+            // Обработчик события нажатия кнопки "закрыть"  
+            // Закрывает текущее окно
             btnClose.Click += (s, e) =>
             {
                 this.Close();
             };
 
+            // Обработчик события нажатия кнопки "сохранить"  
+            // Проверяет, заполнены ли все поля пользователем. 
+            // Если все поля заполнены - отправляет данные на webServer для проверки и дальнейшей регистрации письма в системе
+            
             btnSave.Click += (s, e) =>
             {
                 Validator validator = kernel.Get<Validator>();

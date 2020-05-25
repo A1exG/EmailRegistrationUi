@@ -21,6 +21,8 @@ namespace EmailRegistrationUi.Views
             var validator = kernel.Get<Validator>();
             _webService = webService;
 
+            // Обработчик события загрузки dataGrid
+            // Запрашивает с web servera все зарегистрированные письма и выводит их в dataGrid
             dgEmails.Loaded += (s, e) =>
             {
                 if(btnAllEmails.IsChecked == true)
@@ -31,17 +33,21 @@ namespace EmailRegistrationUi.Views
                 }
             };
 
+            // Обработчик события нажатия на кнопку "все письма"
             btnAllEmails.Click += (s, e) =>
             {
                 txtSerchId.Visibility = Visibility.Hidden;
                 UpdateData();
             };
 
+            // Обработчик события нажатия на кнопку "поиск по Id"
             btnSerchId.Click += (s, e) =>
             {
                 txtSerchId.Visibility = Visibility.Visible;
+                txtSerchId.Text = "";
             };
 
+            // Обработчик события изменения Id в строке поиска и отображение результата в dataGrid
             txtSerchId.TextChanged += (s, e) =>
             {
                 if (validator.CheckStringEmpty(txtSerchId))
@@ -53,20 +59,25 @@ namespace EmailRegistrationUi.Views
                 }
             };
 
+            // Обработчик события нажатия кнопки "закрыть"  
+            // Закрывает текущее окно
             btnClose.Click += (s, e) =>
             {
                 this.Close();
             };
 
+            // Обработчик события нажатия кнопки "отменить"  
             btnCanlse.Click += (s, e) =>
             {
                 gridEdit.Visibility = Visibility.Hidden;
-
                 btnSaveChanges.Visibility = Visibility.Hidden;
                 btnCanlse.Visibility = Visibility.Hidden;
                 btnClose.Visibility = Visibility.Visible;
             };
 
+            // Обработчик события нажатия кнопки "сохранить"  
+            // Сохрание изменений, внесенных пользователев в зарегистрированное письмо
+            // После сохранения обновление данных в dataGrid
             btnSaveChanges.Click += (s, e) =>
             {
                 var connect = webService.SaveChangeEmail(Convert.ToInt32(txtEmailId.Text), txtEmailName.Text, dpEmailRegistrationDate.DisplayDate, txtEmailTo.Text, txtEmailFrom.Text, txtEmailTag.Text, txtEmailContent.Text);
@@ -82,15 +93,16 @@ namespace EmailRegistrationUi.Views
                     UpdateData();
                 }
             };
-
         }
 
+        // Запрашивает с web servera все зарегистрированные письма и выводит их в dataGrid
         private void UpdateData()
         {
             var ItemsSource = _webService.GetAllEmails();
             dgEmails.ItemsSource = ItemsSource;
         }
 
+        // Переименовывает столбцы в dataGrid
         private void DataGridCol()
         {
             dgEmails.Columns[0].Header = "Id";
@@ -113,6 +125,11 @@ namespace EmailRegistrationUi.Views
                     cell.IsSelected = true;
             }
         }
+
+        // Обработчик события клика в dataGrid на ячейку для получения данных 
+        // После нажатия на ячейку, выделяется строка и данные копируются в текстбоксы для редактирования.
+        // 
+        
         private void dgEmails_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             foreach (var item in e.AddedCells)
@@ -138,6 +155,7 @@ namespace EmailRegistrationUi.Views
             }
         }
 
+        // Проверка поля для поиска на ввод только цифр
         private void txtSerchId_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             string inputSymbol = e.Text.ToString();
@@ -146,11 +164,6 @@ namespace EmailRegistrationUi.Views
             {
                 e.Handled = true;
             }
-        }
-
-        private void txtSerchId_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }
