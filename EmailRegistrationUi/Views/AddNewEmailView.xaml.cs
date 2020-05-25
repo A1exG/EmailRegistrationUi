@@ -1,54 +1,47 @@
 ﻿using EmailRegistrationUi.EmailRegistrationWebService;
 using EmailRegistrationUi.Services.Validator;
+using FluentValidation.Results;
 using Ninject;
+using NLog;
 using System.Windows;
 
 namespace EmailRegistrationUi.Views
 {
     public partial class AddNewEmailView : Window
     {
-        public AddNewEmailView(IKernel kernel)
+        public AddNewEmailView(IKernel kernel, WebService _webService, EmailValidator _validator, Logger _logger)
         {
             InitializeComponent();
-            var EmailRegistrationDate = dpEmailRegistrationDate.DisplayDate.Date;
-            var webService = kernel.Get<WebService>();
 
-            // Обработчик события нажатия кнопки "закрыть"  
-            // Закрывает текущее окно
+            var EmailRegistrationDate = dpEmailRegistrationDate.DisplayDate.Date;
+
             btnClose.Click += (s, e) =>
             {
                 this.Close();
             };
-
-            // Обработчик события нажатия кнопки "сохранить"  
-            // Проверяет, заполнены ли все поля пользователем. 
-            // Если все поля заполнены - отправляет данные на webServer для проверки и дальнейшей регистрации письма в системе
             
             btnSave.Click += (s, e) =>
             {
-                Validator validator = kernel.Get<Validator>();
+                Email email = new Email();
+                email.EmailName = txtEmailName.Text;
+                email.EmailRegistrationDate = EmailRegistrationDate;
+                email.EmailTo = txtEmailTo.Text;
+                email.EmailFrom = txtEmailFrom.Text;
+                email.EmailTag = txtEmailTag.Text;
+                email.EmailContent = txtEmailContent.Text;
 
-                if (!validator.CheckStringEmpty(txtEmailName))
-                {MessageBox.Show("Поле название на заполнено");}
-                else if (!validator.CheckDateTimeEmpty(dpEmailRegistrationDate))
-                { MessageBox.Show("Поле даты на заполнено"); }
-                else if(!validator.CheckStringEmpty(txtEmailTo))
-                {MessageBox.Show("Поле адресат на заполнено");}
-                else if (!validator.CheckStringEmpty(txtEmailFrom))
-                {MessageBox.Show("Поле отправитель на заполнено");}
-                else if (!validator.CheckStringEmpty(txtEmailTag))
-                {MessageBox.Show("Поле тэг на заполнено");}
-                else if (!validator.CheckStringEmpty(txtEmailTag))
-                {MessageBox.Show("Поле тэг на заполнено");}
-                else if (!validator.CheckStringEmpty(txtEmailContent))
-                {MessageBox.Show("Поле сообщение на заполнено");}
+                ValidationResult result = _validator.Validate(email);
+                if (result.IsValid)
+                {
+                    _webService.Insert(email);
+                    MessageBox.Show("Сообщение зарегитрированно!");
+                    this.Close();
+                }
                 else
                 {
-                    var connect = webService.AddNewEmail(txtEmailName.Text, EmailRegistrationDate, txtEmailTo.Text, txtEmailFrom.Text, txtEmailTag.Text, txtEmailContent.Text);
-                    if (connect > 0)
+                    foreach (var failure in result.Errors)
                     {
-                        MessageBox.Show("Сообщение зарегитрированно!");
-                        this.Close();
+                        _logger.Error("Property " + failure.PropertyName + " failed validation.Error was: " + failure.ErrorMessage);
                     }
                 }
             };

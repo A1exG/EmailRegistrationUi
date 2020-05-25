@@ -29,21 +29,21 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
     [System.Web.Services.WebServiceBindingAttribute(Name="WebServiceSoap", Namespace="http://microsoft.com/webservices/")]
     public partial class WebService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback AddNewEmailOperationCompleted;
+        private System.Threading.SendOrPostCallback GetOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetAllEmailsOperationCompleted;
+        private System.Threading.SendOrPostCallback GetByIDOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetEmailInIdOperationCompleted;
+        private System.Threading.SendOrPostCallback InsertOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetEmailPeriodDateOperationCompleted;
+        private System.Threading.SendOrPostCallback UpdateOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetEmailToOperationCompleted;
+        private System.Threading.SendOrPostCallback GetDateTimePeriodOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetEmailFromOperationCompleted;
+        private System.Threading.SendOrPostCallback GetByToOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetEmailTagOperationCompleted;
+        private System.Threading.SendOrPostCallback GetByFromOperationCompleted;
         
-        private System.Threading.SendOrPostCallback SaveChangeEmailOperationCompleted;
+        private System.Threading.SendOrPostCallback GetByTagOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -84,280 +84,256 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
         }
         
         /// <remarks/>
-        public event AddNewEmailCompletedEventHandler AddNewEmailCompleted;
+        public event GetCompletedEventHandler GetCompleted;
         
         /// <remarks/>
-        public event GetAllEmailsCompletedEventHandler GetAllEmailsCompleted;
+        public event GetByIDCompletedEventHandler GetByIDCompleted;
         
         /// <remarks/>
-        public event GetEmailInIdCompletedEventHandler GetEmailInIdCompleted;
+        public event InsertCompletedEventHandler InsertCompleted;
         
         /// <remarks/>
-        public event GetEmailPeriodDateCompletedEventHandler GetEmailPeriodDateCompleted;
+        public event UpdateCompletedEventHandler UpdateCompleted;
         
         /// <remarks/>
-        public event GetEmailToCompletedEventHandler GetEmailToCompleted;
+        public event GetDateTimePeriodCompletedEventHandler GetDateTimePeriodCompleted;
         
         /// <remarks/>
-        public event GetEmailFromCompletedEventHandler GetEmailFromCompleted;
+        public event GetByToCompletedEventHandler GetByToCompleted;
         
         /// <remarks/>
-        public event GetEmailTagCompletedEventHandler GetEmailTagCompleted;
+        public event GetByFromCompletedEventHandler GetByFromCompleted;
         
         /// <remarks/>
-        public event SaveChangeEmailCompletedEventHandler SaveChangeEmailCompleted;
+        public event GetByTagCompletedEventHandler GetByTagCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/AddNewEmail", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int AddNewEmail(string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent) {
-            object[] results = this.Invoke("AddNewEmail", new object[] {
-                        emailName,
-                        emailRegistrationDate,
-                        emailTo,
-                        emailFrom,
-                        emailTag,
-                        emailContent});
-            return ((int)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void AddNewEmailAsync(string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent) {
-            this.AddNewEmailAsync(emailName, emailRegistrationDate, emailTo, emailFrom, emailTag, emailContent, null);
-        }
-        
-        /// <remarks/>
-        public void AddNewEmailAsync(string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent, object userState) {
-            if ((this.AddNewEmailOperationCompleted == null)) {
-                this.AddNewEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddNewEmailOperationCompleted);
-            }
-            this.InvokeAsync("AddNewEmail", new object[] {
-                        emailName,
-                        emailRegistrationDate,
-                        emailTo,
-                        emailFrom,
-                        emailTag,
-                        emailContent}, this.AddNewEmailOperationCompleted, userState);
-        }
-        
-        private void OnAddNewEmailOperationCompleted(object arg) {
-            if ((this.AddNewEmailCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.AddNewEmailCompleted(this, new AddNewEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/GetAllEmails", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Email[] GetAllEmails() {
-            object[] results = this.Invoke("GetAllEmails", new object[0]);
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/Get", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Email[] Get() {
+            object[] results = this.Invoke("Get", new object[0]);
             return ((Email[])(results[0]));
         }
         
         /// <remarks/>
-        public void GetAllEmailsAsync() {
-            this.GetAllEmailsAsync(null);
+        public void GetAsync() {
+            this.GetAsync(null);
         }
         
         /// <remarks/>
-        public void GetAllEmailsAsync(object userState) {
-            if ((this.GetAllEmailsOperationCompleted == null)) {
-                this.GetAllEmailsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllEmailsOperationCompleted);
+        public void GetAsync(object userState) {
+            if ((this.GetOperationCompleted == null)) {
+                this.GetOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetOperationCompleted);
             }
-            this.InvokeAsync("GetAllEmails", new object[0], this.GetAllEmailsOperationCompleted, userState);
+            this.InvokeAsync("Get", new object[0], this.GetOperationCompleted, userState);
         }
         
-        private void OnGetAllEmailsOperationCompleted(object arg) {
-            if ((this.GetAllEmailsCompleted != null)) {
+        private void OnGetOperationCompleted(object arg) {
+            if ((this.GetCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetAllEmailsCompleted(this, new GetAllEmailsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetCompleted(this, new GetCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/GetEmailInId", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Email GetEmailInId(int emailId) {
-            object[] results = this.Invoke("GetEmailInId", new object[] {
-                        emailId});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/GetByID", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Email GetByID(int id) {
+            object[] results = this.Invoke("GetByID", new object[] {
+                        id});
             return ((Email)(results[0]));
         }
         
         /// <remarks/>
-        public void GetEmailInIdAsync(int emailId) {
-            this.GetEmailInIdAsync(emailId, null);
+        public void GetByIDAsync(int id) {
+            this.GetByIDAsync(id, null);
         }
         
         /// <remarks/>
-        public void GetEmailInIdAsync(int emailId, object userState) {
-            if ((this.GetEmailInIdOperationCompleted == null)) {
-                this.GetEmailInIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetEmailInIdOperationCompleted);
+        public void GetByIDAsync(int id, object userState) {
+            if ((this.GetByIDOperationCompleted == null)) {
+                this.GetByIDOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetByIDOperationCompleted);
             }
-            this.InvokeAsync("GetEmailInId", new object[] {
-                        emailId}, this.GetEmailInIdOperationCompleted, userState);
+            this.InvokeAsync("GetByID", new object[] {
+                        id}, this.GetByIDOperationCompleted, userState);
         }
         
-        private void OnGetEmailInIdOperationCompleted(object arg) {
-            if ((this.GetEmailInIdCompleted != null)) {
+        private void OnGetByIDOperationCompleted(object arg) {
+            if ((this.GetByIDCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetEmailInIdCompleted(this, new GetEmailInIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetByIDCompleted(this, new GetByIDCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/GetEmailPeriodDate", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Email[] GetEmailPeriodDate(System.DateTime start, System.DateTime end) {
-            object[] results = this.Invoke("GetEmailPeriodDate", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/Insert", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void Insert(Email t) {
+            this.Invoke("Insert", new object[] {
+                        t});
+        }
+        
+        /// <remarks/>
+        public void InsertAsync(Email t) {
+            this.InsertAsync(t, null);
+        }
+        
+        /// <remarks/>
+        public void InsertAsync(Email t, object userState) {
+            if ((this.InsertOperationCompleted == null)) {
+                this.InsertOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInsertOperationCompleted);
+            }
+            this.InvokeAsync("Insert", new object[] {
+                        t}, this.InsertOperationCompleted, userState);
+        }
+        
+        private void OnInsertOperationCompleted(object arg) {
+            if ((this.InsertCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InsertCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/Update", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void Update(Email t) {
+            this.Invoke("Update", new object[] {
+                        t});
+        }
+        
+        /// <remarks/>
+        public void UpdateAsync(Email t) {
+            this.UpdateAsync(t, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateAsync(Email t, object userState) {
+            if ((this.UpdateOperationCompleted == null)) {
+                this.UpdateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateOperationCompleted);
+            }
+            this.InvokeAsync("Update", new object[] {
+                        t}, this.UpdateOperationCompleted, userState);
+        }
+        
+        private void OnUpdateOperationCompleted(object arg) {
+            if ((this.UpdateCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/GetDateTimePeriod", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Email[] GetDateTimePeriod(System.DateTime start, System.DateTime end) {
+            object[] results = this.Invoke("GetDateTimePeriod", new object[] {
                         start,
                         end});
             return ((Email[])(results[0]));
         }
         
         /// <remarks/>
-        public void GetEmailPeriodDateAsync(System.DateTime start, System.DateTime end) {
-            this.GetEmailPeriodDateAsync(start, end, null);
+        public void GetDateTimePeriodAsync(System.DateTime start, System.DateTime end) {
+            this.GetDateTimePeriodAsync(start, end, null);
         }
         
         /// <remarks/>
-        public void GetEmailPeriodDateAsync(System.DateTime start, System.DateTime end, object userState) {
-            if ((this.GetEmailPeriodDateOperationCompleted == null)) {
-                this.GetEmailPeriodDateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetEmailPeriodDateOperationCompleted);
+        public void GetDateTimePeriodAsync(System.DateTime start, System.DateTime end, object userState) {
+            if ((this.GetDateTimePeriodOperationCompleted == null)) {
+                this.GetDateTimePeriodOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDateTimePeriodOperationCompleted);
             }
-            this.InvokeAsync("GetEmailPeriodDate", new object[] {
+            this.InvokeAsync("GetDateTimePeriod", new object[] {
                         start,
-                        end}, this.GetEmailPeriodDateOperationCompleted, userState);
+                        end}, this.GetDateTimePeriodOperationCompleted, userState);
         }
         
-        private void OnGetEmailPeriodDateOperationCompleted(object arg) {
-            if ((this.GetEmailPeriodDateCompleted != null)) {
+        private void OnGetDateTimePeriodOperationCompleted(object arg) {
+            if ((this.GetDateTimePeriodCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetEmailPeriodDateCompleted(this, new GetEmailPeriodDateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetDateTimePeriodCompleted(this, new GetDateTimePeriodCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/GetEmailTo", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Email[] GetEmailTo(string emailTo) {
-            object[] results = this.Invoke("GetEmailTo", new object[] {
-                        emailTo});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/GetByTo", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Email[] GetByTo(string str) {
+            object[] results = this.Invoke("GetByTo", new object[] {
+                        str});
             return ((Email[])(results[0]));
         }
         
         /// <remarks/>
-        public void GetEmailToAsync(string emailTo) {
-            this.GetEmailToAsync(emailTo, null);
+        public void GetByToAsync(string str) {
+            this.GetByToAsync(str, null);
         }
         
         /// <remarks/>
-        public void GetEmailToAsync(string emailTo, object userState) {
-            if ((this.GetEmailToOperationCompleted == null)) {
-                this.GetEmailToOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetEmailToOperationCompleted);
+        public void GetByToAsync(string str, object userState) {
+            if ((this.GetByToOperationCompleted == null)) {
+                this.GetByToOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetByToOperationCompleted);
             }
-            this.InvokeAsync("GetEmailTo", new object[] {
-                        emailTo}, this.GetEmailToOperationCompleted, userState);
+            this.InvokeAsync("GetByTo", new object[] {
+                        str}, this.GetByToOperationCompleted, userState);
         }
         
-        private void OnGetEmailToOperationCompleted(object arg) {
-            if ((this.GetEmailToCompleted != null)) {
+        private void OnGetByToOperationCompleted(object arg) {
+            if ((this.GetByToCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetEmailToCompleted(this, new GetEmailToCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetByToCompleted(this, new GetByToCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/GetEmailFrom", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Email[] GetEmailFrom(string emailFrom) {
-            object[] results = this.Invoke("GetEmailFrom", new object[] {
-                        emailFrom});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/GetByFrom", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Email[] GetByFrom(string str) {
+            object[] results = this.Invoke("GetByFrom", new object[] {
+                        str});
             return ((Email[])(results[0]));
         }
         
         /// <remarks/>
-        public void GetEmailFromAsync(string emailFrom) {
-            this.GetEmailFromAsync(emailFrom, null);
+        public void GetByFromAsync(string str) {
+            this.GetByFromAsync(str, null);
         }
         
         /// <remarks/>
-        public void GetEmailFromAsync(string emailFrom, object userState) {
-            if ((this.GetEmailFromOperationCompleted == null)) {
-                this.GetEmailFromOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetEmailFromOperationCompleted);
+        public void GetByFromAsync(string str, object userState) {
+            if ((this.GetByFromOperationCompleted == null)) {
+                this.GetByFromOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetByFromOperationCompleted);
             }
-            this.InvokeAsync("GetEmailFrom", new object[] {
-                        emailFrom}, this.GetEmailFromOperationCompleted, userState);
+            this.InvokeAsync("GetByFrom", new object[] {
+                        str}, this.GetByFromOperationCompleted, userState);
         }
         
-        private void OnGetEmailFromOperationCompleted(object arg) {
-            if ((this.GetEmailFromCompleted != null)) {
+        private void OnGetByFromOperationCompleted(object arg) {
+            if ((this.GetByFromCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetEmailFromCompleted(this, new GetEmailFromCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetByFromCompleted(this, new GetByFromCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/GetEmailTag", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Email[] GetEmailTag(string emailTag) {
-            object[] results = this.Invoke("GetEmailTag", new object[] {
-                        emailTag});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/GetByTag", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Email[] GetByTag(string str) {
+            object[] results = this.Invoke("GetByTag", new object[] {
+                        str});
             return ((Email[])(results[0]));
         }
         
         /// <remarks/>
-        public void GetEmailTagAsync(string emailTag) {
-            this.GetEmailTagAsync(emailTag, null);
+        public void GetByTagAsync(string str) {
+            this.GetByTagAsync(str, null);
         }
         
         /// <remarks/>
-        public void GetEmailTagAsync(string emailTag, object userState) {
-            if ((this.GetEmailTagOperationCompleted == null)) {
-                this.GetEmailTagOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetEmailTagOperationCompleted);
+        public void GetByTagAsync(string str, object userState) {
+            if ((this.GetByTagOperationCompleted == null)) {
+                this.GetByTagOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetByTagOperationCompleted);
             }
-            this.InvokeAsync("GetEmailTag", new object[] {
-                        emailTag}, this.GetEmailTagOperationCompleted, userState);
+            this.InvokeAsync("GetByTag", new object[] {
+                        str}, this.GetByTagOperationCompleted, userState);
         }
         
-        private void OnGetEmailTagOperationCompleted(object arg) {
-            if ((this.GetEmailTagCompleted != null)) {
+        private void OnGetByTagOperationCompleted(object arg) {
+            if ((this.GetByTagCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetEmailTagCompleted(this, new GetEmailTagCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/SaveChangeEmail", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int SaveChangeEmail(int emailId, string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent) {
-            object[] results = this.Invoke("SaveChangeEmail", new object[] {
-                        emailId,
-                        emailName,
-                        emailRegistrationDate,
-                        emailTo,
-                        emailFrom,
-                        emailTag,
-                        emailContent});
-            return ((int)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void SaveChangeEmailAsync(int emailId, string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent) {
-            this.SaveChangeEmailAsync(emailId, emailName, emailRegistrationDate, emailTo, emailFrom, emailTag, emailContent, null);
-        }
-        
-        /// <remarks/>
-        public void SaveChangeEmailAsync(int emailId, string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent, object userState) {
-            if ((this.SaveChangeEmailOperationCompleted == null)) {
-                this.SaveChangeEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveChangeEmailOperationCompleted);
-            }
-            this.InvokeAsync("SaveChangeEmail", new object[] {
-                        emailId,
-                        emailName,
-                        emailRegistrationDate,
-                        emailTo,
-                        emailFrom,
-                        emailTag,
-                        emailContent}, this.SaveChangeEmailOperationCompleted, userState);
-        }
-        
-        private void OnSaveChangeEmailOperationCompleted(object arg) {
-            if ((this.SaveChangeEmailCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SaveChangeEmailCompleted(this, new SaveChangeEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetByTagCompleted(this, new GetByTagCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -475,43 +451,17 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void AddNewEmailCompletedEventHandler(object sender, AddNewEmailCompletedEventArgs e);
+    public delegate void GetCompletedEventHandler(object sender, GetCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class AddNewEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal AddNewEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public int Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetAllEmailsCompletedEventHandler(object sender, GetAllEmailsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetAllEmailsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetAllEmailsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GetCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -527,17 +477,17 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetEmailInIdCompletedEventHandler(object sender, GetEmailInIdCompletedEventArgs e);
+    public delegate void GetByIDCompletedEventHandler(object sender, GetByIDCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetEmailInIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetByIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GetEmailInIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GetByIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -553,17 +503,25 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetEmailPeriodDateCompletedEventHandler(object sender, GetEmailPeriodDateCompletedEventArgs e);
+    public delegate void InsertCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    public delegate void UpdateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    public delegate void GetDateTimePeriodCompletedEventHandler(object sender, GetDateTimePeriodCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetEmailPeriodDateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetDateTimePeriodCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GetEmailPeriodDateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GetDateTimePeriodCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -579,17 +537,17 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetEmailToCompletedEventHandler(object sender, GetEmailToCompletedEventArgs e);
+    public delegate void GetByToCompletedEventHandler(object sender, GetByToCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetEmailToCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetByToCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GetEmailToCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GetByToCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -605,17 +563,17 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetEmailFromCompletedEventHandler(object sender, GetEmailFromCompletedEventArgs e);
+    public delegate void GetByFromCompletedEventHandler(object sender, GetByFromCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetEmailFromCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetByFromCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GetEmailFromCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GetByFromCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -631,17 +589,17 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetEmailTagCompletedEventHandler(object sender, GetEmailTagCompletedEventArgs e);
+    public delegate void GetByTagCompletedEventHandler(object sender, GetByTagCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetEmailTagCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetByTagCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GetEmailTagCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GetByTagCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -651,32 +609,6 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Email[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void SaveChangeEmailCompletedEventHandler(object sender, SaveChangeEmailCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SaveChangeEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SaveChangeEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public int Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
             }
         }
     }

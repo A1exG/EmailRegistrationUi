@@ -2,32 +2,13 @@
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://microsoft.com/webservices/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://microsoft.com/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/webservices/">
-      <s:element name="AddNewEmail">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="emailName" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="emailRegistrationDate" type="s:dateTime" />
-            <s:element minOccurs="0" maxOccurs="1" name="emailTo" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="emailFrom" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="emailTag" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="emailContent" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="AddNewEmailResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="AddNewEmailResult" type="s:int" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetAllEmails">
+      <s:element name="Get">
         <s:complexType />
       </s:element>
-      <s:element name="GetAllEmailsResponse">
+      <s:element name="GetResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetAllEmailsResult" type="tns:ArrayOfEmail" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetResult" type="tns:ArrayOfEmail" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -47,21 +28,41 @@
           <s:element minOccurs="0" maxOccurs="1" name="EmailContent" type="s:string" />
         </s:sequence>
       </s:complexType>
-      <s:element name="GetEmailInId">
+      <s:element name="GetByID">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="emailId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetEmailInIdResponse">
+      <s:element name="GetByIDResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetEmailInIdResult" type="tns:Email" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetByIDResult" type="tns:Email" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetEmailPeriodDate">
+      <s:element name="Insert">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="t" type="tns:Email" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="t" type="tns:Email" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDateTimePeriod">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="start" type="s:dateTime" />
@@ -69,163 +70,143 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetEmailPeriodDateResponse">
+      <s:element name="GetDateTimePeriodResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetEmailPeriodDateResult" type="tns:ArrayOfEmail" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetDateTimePeriodResult" type="tns:ArrayOfEmail" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetEmailTo">
+      <s:element name="GetByTo">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="emailTo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="str" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetEmailToResponse">
+      <s:element name="GetByToResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetEmailToResult" type="tns:ArrayOfEmail" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetByToResult" type="tns:ArrayOfEmail" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetEmailFrom">
+      <s:element name="GetByFrom">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="emailFrom" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="str" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetEmailFromResponse">
+      <s:element name="GetByFromResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetEmailFromResult" type="tns:ArrayOfEmail" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetByFromResult" type="tns:ArrayOfEmail" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetEmailTag">
+      <s:element name="GetByTag">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="emailTag" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="str" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetEmailTagResponse">
+      <s:element name="GetByTagResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetEmailTagResult" type="tns:ArrayOfEmail" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="SaveChangeEmail">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="emailId" type="s:int" />
-            <s:element minOccurs="0" maxOccurs="1" name="emailName" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="emailRegistrationDate" type="s:dateTime" />
-            <s:element minOccurs="0" maxOccurs="1" name="emailTo" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="emailFrom" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="emailTag" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="emailContent" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="SaveChangeEmailResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="SaveChangeEmailResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetByTagResult" type="tns:ArrayOfEmail" />
           </s:sequence>
         </s:complexType>
       </s:element>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="AddNewEmailSoapIn">
-    <wsdl:part name="parameters" element="tns:AddNewEmail" />
+  <wsdl:message name="GetSoapIn">
+    <wsdl:part name="parameters" element="tns:Get" />
   </wsdl:message>
-  <wsdl:message name="AddNewEmailSoapOut">
-    <wsdl:part name="parameters" element="tns:AddNewEmailResponse" />
+  <wsdl:message name="GetSoapOut">
+    <wsdl:part name="parameters" element="tns:GetResponse" />
   </wsdl:message>
-  <wsdl:message name="GetAllEmailsSoapIn">
-    <wsdl:part name="parameters" element="tns:GetAllEmails" />
+  <wsdl:message name="GetByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetByID" />
   </wsdl:message>
-  <wsdl:message name="GetAllEmailsSoapOut">
-    <wsdl:part name="parameters" element="tns:GetAllEmailsResponse" />
+  <wsdl:message name="GetByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetByIDResponse" />
   </wsdl:message>
-  <wsdl:message name="GetEmailInIdSoapIn">
-    <wsdl:part name="parameters" element="tns:GetEmailInId" />
+  <wsdl:message name="InsertSoapIn">
+    <wsdl:part name="parameters" element="tns:Insert" />
   </wsdl:message>
-  <wsdl:message name="GetEmailInIdSoapOut">
-    <wsdl:part name="parameters" element="tns:GetEmailInIdResponse" />
+  <wsdl:message name="InsertSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertResponse" />
   </wsdl:message>
-  <wsdl:message name="GetEmailPeriodDateSoapIn">
-    <wsdl:part name="parameters" element="tns:GetEmailPeriodDate" />
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
   </wsdl:message>
-  <wsdl:message name="GetEmailPeriodDateSoapOut">
-    <wsdl:part name="parameters" element="tns:GetEmailPeriodDateResponse" />
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
   </wsdl:message>
-  <wsdl:message name="GetEmailToSoapIn">
-    <wsdl:part name="parameters" element="tns:GetEmailTo" />
+  <wsdl:message name="GetDateTimePeriodSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDateTimePeriod" />
   </wsdl:message>
-  <wsdl:message name="GetEmailToSoapOut">
-    <wsdl:part name="parameters" element="tns:GetEmailToResponse" />
+  <wsdl:message name="GetDateTimePeriodSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDateTimePeriodResponse" />
   </wsdl:message>
-  <wsdl:message name="GetEmailFromSoapIn">
-    <wsdl:part name="parameters" element="tns:GetEmailFrom" />
+  <wsdl:message name="GetByToSoapIn">
+    <wsdl:part name="parameters" element="tns:GetByTo" />
   </wsdl:message>
-  <wsdl:message name="GetEmailFromSoapOut">
-    <wsdl:part name="parameters" element="tns:GetEmailFromResponse" />
+  <wsdl:message name="GetByToSoapOut">
+    <wsdl:part name="parameters" element="tns:GetByToResponse" />
   </wsdl:message>
-  <wsdl:message name="GetEmailTagSoapIn">
-    <wsdl:part name="parameters" element="tns:GetEmailTag" />
+  <wsdl:message name="GetByFromSoapIn">
+    <wsdl:part name="parameters" element="tns:GetByFrom" />
   </wsdl:message>
-  <wsdl:message name="GetEmailTagSoapOut">
-    <wsdl:part name="parameters" element="tns:GetEmailTagResponse" />
+  <wsdl:message name="GetByFromSoapOut">
+    <wsdl:part name="parameters" element="tns:GetByFromResponse" />
   </wsdl:message>
-  <wsdl:message name="SaveChangeEmailSoapIn">
-    <wsdl:part name="parameters" element="tns:SaveChangeEmail" />
+  <wsdl:message name="GetByTagSoapIn">
+    <wsdl:part name="parameters" element="tns:GetByTag" />
   </wsdl:message>
-  <wsdl:message name="SaveChangeEmailSoapOut">
-    <wsdl:part name="parameters" element="tns:SaveChangeEmailResponse" />
+  <wsdl:message name="GetByTagSoapOut">
+    <wsdl:part name="parameters" element="tns:GetByTagResponse" />
   </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
-    <wsdl:operation name="AddNewEmail">
-      <wsdl:input message="tns:AddNewEmailSoapIn" />
-      <wsdl:output message="tns:AddNewEmailSoapOut" />
+    <wsdl:operation name="Get">
+      <wsdl:input message="tns:GetSoapIn" />
+      <wsdl:output message="tns:GetSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetAllEmails">
-      <wsdl:input message="tns:GetAllEmailsSoapIn" />
-      <wsdl:output message="tns:GetAllEmailsSoapOut" />
+    <wsdl:operation name="GetByID">
+      <wsdl:input message="tns:GetByIDSoapIn" />
+      <wsdl:output message="tns:GetByIDSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetEmailInId">
-      <wsdl:input message="tns:GetEmailInIdSoapIn" />
-      <wsdl:output message="tns:GetEmailInIdSoapOut" />
+    <wsdl:operation name="Insert">
+      <wsdl:input message="tns:InsertSoapIn" />
+      <wsdl:output message="tns:InsertSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetEmailPeriodDate">
-      <wsdl:input message="tns:GetEmailPeriodDateSoapIn" />
-      <wsdl:output message="tns:GetEmailPeriodDateSoapOut" />
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetEmailTo">
-      <wsdl:input message="tns:GetEmailToSoapIn" />
-      <wsdl:output message="tns:GetEmailToSoapOut" />
+    <wsdl:operation name="GetDateTimePeriod">
+      <wsdl:input message="tns:GetDateTimePeriodSoapIn" />
+      <wsdl:output message="tns:GetDateTimePeriodSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetEmailFrom">
-      <wsdl:input message="tns:GetEmailFromSoapIn" />
-      <wsdl:output message="tns:GetEmailFromSoapOut" />
+    <wsdl:operation name="GetByTo">
+      <wsdl:input message="tns:GetByToSoapIn" />
+      <wsdl:output message="tns:GetByToSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetEmailTag">
-      <wsdl:input message="tns:GetEmailTagSoapIn" />
-      <wsdl:output message="tns:GetEmailTagSoapOut" />
+    <wsdl:operation name="GetByFrom">
+      <wsdl:input message="tns:GetByFromSoapIn" />
+      <wsdl:output message="tns:GetByFromSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SaveChangeEmail">
-      <wsdl:input message="tns:SaveChangeEmailSoapIn" />
-      <wsdl:output message="tns:SaveChangeEmailSoapOut" />
+    <wsdl:operation name="GetByTag">
+      <wsdl:input message="tns:GetByTagSoapIn" />
+      <wsdl:output message="tns:GetByTagSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="AddNewEmail">
-      <soap:operation soapAction="http://microsoft.com/webservices/AddNewEmail" style="document" />
+    <wsdl:operation name="Get">
+      <soap:operation soapAction="http://microsoft.com/webservices/Get" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -233,8 +214,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAllEmails">
-      <soap:operation soapAction="http://microsoft.com/webservices/GetAllEmails" style="document" />
+    <wsdl:operation name="GetByID">
+      <soap:operation soapAction="http://microsoft.com/webservices/GetByID" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -242,8 +223,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEmailInId">
-      <soap:operation soapAction="http://microsoft.com/webservices/GetEmailInId" style="document" />
+    <wsdl:operation name="Insert">
+      <soap:operation soapAction="http://microsoft.com/webservices/Insert" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -251,8 +232,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEmailPeriodDate">
-      <soap:operation soapAction="http://microsoft.com/webservices/GetEmailPeriodDate" style="document" />
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://microsoft.com/webservices/Update" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -260,8 +241,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEmailTo">
-      <soap:operation soapAction="http://microsoft.com/webservices/GetEmailTo" style="document" />
+    <wsdl:operation name="GetDateTimePeriod">
+      <soap:operation soapAction="http://microsoft.com/webservices/GetDateTimePeriod" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -269,8 +250,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEmailFrom">
-      <soap:operation soapAction="http://microsoft.com/webservices/GetEmailFrom" style="document" />
+    <wsdl:operation name="GetByTo">
+      <soap:operation soapAction="http://microsoft.com/webservices/GetByTo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -278,8 +259,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEmailTag">
-      <soap:operation soapAction="http://microsoft.com/webservices/GetEmailTag" style="document" />
+    <wsdl:operation name="GetByFrom">
+      <soap:operation soapAction="http://microsoft.com/webservices/GetByFrom" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -287,8 +268,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SaveChangeEmail">
-      <soap:operation soapAction="http://microsoft.com/webservices/SaveChangeEmail" style="document" />
+    <wsdl:operation name="GetByTag">
+      <soap:operation soapAction="http://microsoft.com/webservices/GetByTag" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -299,8 +280,8 @@
   </wsdl:binding>
   <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="AddNewEmail">
-      <soap12:operation soapAction="http://microsoft.com/webservices/AddNewEmail" style="document" />
+    <wsdl:operation name="Get">
+      <soap12:operation soapAction="http://microsoft.com/webservices/Get" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -308,8 +289,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAllEmails">
-      <soap12:operation soapAction="http://microsoft.com/webservices/GetAllEmails" style="document" />
+    <wsdl:operation name="GetByID">
+      <soap12:operation soapAction="http://microsoft.com/webservices/GetByID" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -317,8 +298,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEmailInId">
-      <soap12:operation soapAction="http://microsoft.com/webservices/GetEmailInId" style="document" />
+    <wsdl:operation name="Insert">
+      <soap12:operation soapAction="http://microsoft.com/webservices/Insert" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -326,8 +307,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEmailPeriodDate">
-      <soap12:operation soapAction="http://microsoft.com/webservices/GetEmailPeriodDate" style="document" />
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://microsoft.com/webservices/Update" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -335,8 +316,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEmailTo">
-      <soap12:operation soapAction="http://microsoft.com/webservices/GetEmailTo" style="document" />
+    <wsdl:operation name="GetDateTimePeriod">
+      <soap12:operation soapAction="http://microsoft.com/webservices/GetDateTimePeriod" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -344,8 +325,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEmailFrom">
-      <soap12:operation soapAction="http://microsoft.com/webservices/GetEmailFrom" style="document" />
+    <wsdl:operation name="GetByTo">
+      <soap12:operation soapAction="http://microsoft.com/webservices/GetByTo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -353,8 +334,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEmailTag">
-      <soap12:operation soapAction="http://microsoft.com/webservices/GetEmailTag" style="document" />
+    <wsdl:operation name="GetByFrom">
+      <soap12:operation soapAction="http://microsoft.com/webservices/GetByFrom" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -362,8 +343,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SaveChangeEmail">
-      <soap12:operation soapAction="http://microsoft.com/webservices/SaveChangeEmail" style="document" />
+    <wsdl:operation name="GetByTag">
+      <soap12:operation soapAction="http://microsoft.com/webservices/GetByTag" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

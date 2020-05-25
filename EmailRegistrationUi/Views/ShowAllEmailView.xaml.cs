@@ -1,6 +1,7 @@
 ﻿using EmailRegistrationUi.EmailRegistrationWebService;
 using EmailRegistrationUi.Services.Validator;
 using Ninject;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -13,21 +14,19 @@ namespace EmailRegistrationUi.Views
 {
     public partial class ShowAllEmailView : Window
     {
-        private WebService _webService;
-        public ShowAllEmailView(IKernel kernel)
+        private WebService webService;
+        public ShowAllEmailView(IKernel kernel, WebService _webService, EmailValidator _validator, Logger _logger)
         {
             InitializeComponent();
-            var webService = kernel.Get<WebService>();
-            var validator = kernel.Get<Validator>();
-            _webService = webService;
+            webService = _webService;
 
             // Обработчик события загрузки dataGrid
             // Запрашивает с web servera все зарегистрированные письма и выводит их в dataGrid
             dgEmails.Loaded += (s, e) =>
             {
-                if(btnAllEmails.IsChecked == true)
+                if (btnAllEmails.IsChecked == true)
                 {
-                    var ItemsSource = _webService.GetAllEmails();
+                    var ItemsSource = _webService.Get();
                     dgEmails.ItemsSource = ItemsSource;
                     DataGridCol();
                 }
@@ -50,10 +49,10 @@ namespace EmailRegistrationUi.Views
             // Обработчик события изменения Id в строке поиска и отображение результата в dataGrid
             txtSerchId.TextChanged += (s, e) =>
             {
-                if (validator.CheckStringEmpty(txtSerchId))
+                if (txtSerchId.Text != null)
                 {
                     List<Email> listE = new List<Email>();
-                    listE.Add(webService.GetEmailInId(Convert.ToInt32(txtSerchId.Text)));
+                    listE.Add(webService.GetByID(Convert.ToInt32(txtSerchId.Text)));
                     dgEmails.ItemsSource = listE;
                     DataGridCol();
                 }
@@ -80,25 +79,32 @@ namespace EmailRegistrationUi.Views
             // После сохранения обновление данных в dataGrid
             btnSaveChanges.Click += (s, e) =>
             {
-                var connect = webService.SaveChangeEmail(Convert.ToInt32(txtEmailId.Text), txtEmailName.Text, dpEmailRegistrationDate.DisplayDate, txtEmailTo.Text, txtEmailFrom.Text, txtEmailTag.Text, txtEmailContent.Text);
-                if (connect > 0)
-                {
-                    MessageBox.Show("Сообщение изменено!");
-                    gridEdit.Visibility = Visibility.Hidden;
+                Email email = new Email();
+                email.EmailId =Convert.ToInt32(txtEmailId.Text);
+                email.EmailName = txtEmailName.Text;
+                email.EmailRegistrationDate = dpEmailRegistrationDate.DisplayDate;
+                email.EmailTo = txtEmailTo.Text;
+                email.EmailFrom = txtEmailFrom.Text;
+                email.EmailTag = txtEmailTag.Text;
+                email.EmailContent = txtEmailTag.Text;
+                
+                webService.Update(email);
+                
+                MessageBox.Show("Сообщение изменено!");
+                gridEdit.Visibility = Visibility.Hidden;
 
-                    btnSaveChanges.Visibility = Visibility.Hidden;
-                    btnCanlse.Visibility = Visibility.Hidden;
-                    btnClose.Visibility = Visibility.Visible;
+                btnSaveChanges.Visibility = Visibility.Hidden;
+                btnCanlse.Visibility = Visibility.Hidden;
+                btnClose.Visibility = Visibility.Visible;
 
-                    UpdateData();
-                }
+                UpdateData();
             };
         }
 
         // Запрашивает с web servera все зарегистрированные письма и выводит их в dataGrid
         private void UpdateData()
         {
-            var ItemsSource = _webService.GetAllEmails();
+            var ItemsSource = webService.Get();
             dgEmails.ItemsSource = ItemsSource;
         }
 
