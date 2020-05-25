@@ -75,9 +75,6 @@
     <Compile Include="Views\ShowAllEmailView.xaml.cs">
       <DependentUpon>ShowAllEmailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ShowEmailInIdView.xaml.cs">
-      <DependentUpon>ShowEmailInIdView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Web References\EmailRegistrationWebService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -129,10 +126,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShowAllEmailView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ShowEmailInIdView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

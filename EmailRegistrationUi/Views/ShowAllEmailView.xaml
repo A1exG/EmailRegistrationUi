@@ -10,18 +10,39 @@
         <Grid Height="50" VerticalAlignment="Top" Background="#FF727EF3">
             <TextBlock Text="Просмотр всех писем" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
-        <Grid Height="auto" Width="auto" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 55 0 0" >
+
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Height="70" Margin="0 50 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <GroupBox Header="Выбор поиска письма">
+                <StackPanel>
+                    <RadioButton x:Name="btnAllEmails" IsChecked="True" Margin="3">Все письма</RadioButton>
+                    <RadioButton x:Name="btnSerchId" Margin="3">По Id письма</RadioButton>
+                </StackPanel>
+            </GroupBox>
+
+        </Grid>
+        <Grid Height="250" Width="800" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 120 0 0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"></ColumnDefinition>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="5"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <DataGrid Grid.Column="1" x:Name="dgEmails" IsReadOnly="True" SelectedCellsChanged="dgEmails_SelectedCellsChanged"  SelectionUnit="FullRow" SelectionMode="Single" Height="300"
+            <DataGrid Grid.Column="1" x:Name="dgEmails" IsReadOnly="True" SelectedCellsChanged="dgEmails_SelectedCellsChanged"  SelectionUnit="FullRow" SelectionMode="Single" Height="200"
                       Width="auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  ScrollViewer.VerticalScrollBarVisibility="Visible">
             </DataGrid>
         </Grid>
-        <Grid VerticalAlignment="Bottom"  HorizontalAlignment="Center" Width="150" Height="50">
+        <Grid VerticalAlignment="Bottom"  HorizontalAlignment="Center" Width="370" Height="50">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -29,7 +50,48 @@
                 <RowDefinition Height="5"></RowDefinition>
             </Grid.RowDefinitions>
             <Button Grid.Column="0" Grid.Row="0" x:Name="btnClose" BorderBrush="AntiqueWhite" Content="Закрыть" Background="#FF727EF3" FontSize="14" Foreground="White"></Button>
+            <Button Grid.Column="2" Grid.Row="0" x:Name="btnSaveChanges" Visibility="Hidden" BorderBrush="AntiqueWhite" Content="Сохранить" Background="#FF727EF3" FontSize="14" Foreground="White"></Button>
+            <Button Grid.Column="4" Grid.Row="0" x:Name="btnCanlse" Visibility="Hidden" BorderBrush="AntiqueWhite" Content="Отменить" Background="#FF727EF3" FontSize="14" Foreground="White"></Button>
         </Grid>
-        
+
+        <Grid x:Name="gridEdit" Visibility="Hidden" Height="200" Width="500" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10 10 10 60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="190"></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" x:Name="lblEmailName" FontSize="18" Text="Название письма :" TextDecorations="Underline" Background="#FF9DABC9" Foreground="White"></TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="2" Name="txtEmailName" BorderBrush="LightBlue" TextWrapping="Wrap"></TextBox>
+            <TextBlock Grid.Row="1" Grid.Column="0" x:Name="txtEmailId" Visibility="Hidden"></TextBlock>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" x:Name="lblDateRegistration" FontSize="18" Text="Дата регистрации :" TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>
+            <DatePicker Grid.Row="2" Grid.Column="2" x:Name="dpEmailRegistrationDate" FontSize="18" BorderBrush="LightBlue"></DatePicker>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" x:Name="lblEmailTo" FontSize="18" Text="Адресата письма :" TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>
+            <TextBox Grid.Row="4" Grid.Column="2" Name="txtEmailTo" BorderBrush="LightBlue" TextWrapping="Wrap"></TextBox>
+
+            <TextBlock Grid.Row="6" Grid.Column="0" x:Name="lblEmailFrom" FontSize="18" Text="Отправителя письма :" TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>
+            <TextBox Grid.Row="6" Grid.Column="2" Name="txtEmailFrom" BorderBrush="LightBlue" TextWrapping="Wrap"></TextBox>
+
+            <TextBlock Grid.Row="8" Grid.Column="0" x:Name="lblEmailTag" FontSize="18" Text="Тэг письма :" TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>
+            <TextBox Grid.Row="8" Grid.Column="2" Name="txtEmailTag" BorderBrush="LightBlue" TextWrapping="Wrap"></TextBox>
+
+            <TextBlock Grid.Row="10" Grid.Column="0" x:Name="lblEmailContent" FontSize="18" Text="Текст письма :" Height="40" VerticalAlignment="Top"  TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>
+            <TextBox Grid.Row="10" Grid.Column="2" Name="txtEmailContent" BorderBrush="LightBlue" TextWrapping="Wrap"></TextBox>
+        </Grid>
+        <TextBox HorizontalAlignment="Left" Height="19" x:Name="txtSerchId" Visibility="Hidden" Margin="110,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="84" PreviewTextInput="txtSerchId_PreviewTextInput"/>
+
     </Grid>
 </Window>

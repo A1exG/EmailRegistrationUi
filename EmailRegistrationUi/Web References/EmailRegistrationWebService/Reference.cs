@@ -43,6 +43,8 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
         
         private System.Threading.SendOrPostCallback GetEmailTagOperationCompleted;
         
+        private System.Threading.SendOrPostCallback SaveChangeEmailOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -101,6 +103,9 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
         
         /// <remarks/>
         public event GetEmailTagCompletedEventHandler GetEmailTagCompleted;
+        
+        /// <remarks/>
+        public event SaveChangeEmailCompletedEventHandler SaveChangeEmailCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/AddNewEmail", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -312,6 +317,47 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
             if ((this.GetEmailTagCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetEmailTagCompleted(this, new GetEmailTagCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://microsoft.com/webservices/SaveChangeEmail", RequestNamespace="http://microsoft.com/webservices/", ResponseNamespace="http://microsoft.com/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int SaveChangeEmail(int emailId, string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent) {
+            object[] results = this.Invoke("SaveChangeEmail", new object[] {
+                        emailId,
+                        emailName,
+                        emailRegistrationDate,
+                        emailTo,
+                        emailFrom,
+                        emailTag,
+                        emailContent});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SaveChangeEmailAsync(int emailId, string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent) {
+            this.SaveChangeEmailAsync(emailId, emailName, emailRegistrationDate, emailTo, emailFrom, emailTag, emailContent, null);
+        }
+        
+        /// <remarks/>
+        public void SaveChangeEmailAsync(int emailId, string emailName, System.DateTime emailRegistrationDate, string emailTo, string emailFrom, string emailTag, string emailContent, object userState) {
+            if ((this.SaveChangeEmailOperationCompleted == null)) {
+                this.SaveChangeEmailOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveChangeEmailOperationCompleted);
+            }
+            this.InvokeAsync("SaveChangeEmail", new object[] {
+                        emailId,
+                        emailName,
+                        emailRegistrationDate,
+                        emailTo,
+                        emailFrom,
+                        emailTag,
+                        emailContent}, this.SaveChangeEmailOperationCompleted, userState);
+        }
+        
+        private void OnSaveChangeEmailOperationCompleted(object arg) {
+            if ((this.SaveChangeEmailCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveChangeEmailCompleted(this, new SaveChangeEmailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -605,6 +651,32 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Email[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    public delegate void SaveChangeEmailCompletedEventHandler(object sender, SaveChangeEmailCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SaveChangeEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SaveChangeEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
             }
         }
     }

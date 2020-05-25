@@ -33,7 +33,7 @@
             <TextBlock Grid.Row="0" Grid.Column="0" x:Name="lblEmailName" FontSize="18" Text="Введите название письма :" TextDecorations="Underline" Background="#FF9DABC9" Foreground="White"></TextBlock>
             <TextBox Grid.Row="0" Grid.Column="2" Name="txtEmailName" BorderBrush="LightBlue" TextWrapping="Wrap"></TextBox>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" x:Name="lblDateRegistration" FontSize="18" Text="Введите название письма :" TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" x:Name="lblDateRegistration" FontSize="18" Text="Введите дату регистрации :" TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>
             <DatePicker Grid.Row="2" Grid.Column="2" x:Name="dpEmailRegistrationDate" FontSize="18" BorderBrush="LightBlue"></DatePicker>
 
             <TextBlock Grid.Row="4" Grid.Column="0" x:Name="lblEmailTo" FontSize="18" Text="Введите адресата письма :" TextDecorations="Underline" Background="#FF9DABC9"></TextBlock>

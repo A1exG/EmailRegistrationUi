@@ -12,5 +12,6 @@ namespace EmailRegistrationUi.Services.Validator
         bool CheckStringEmpty(TextBox textBox);
 
         bool CheckDateTimeEmpty(DatePicker datePicker);
+
     }
 }

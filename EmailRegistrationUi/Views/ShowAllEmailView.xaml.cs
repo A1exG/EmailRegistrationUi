@@ -1,30 +1,97 @@
-﻿using Ninject;
+﻿using EmailRegistrationUi.EmailRegistrationWebService;
+using EmailRegistrationUi.Services.Validator;
+using Ninject;
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace EmailRegistrationUi.Views
 {
     public partial class ShowAllEmailView : Window
     {
+        private WebService _webService;
         public ShowAllEmailView(IKernel kernel)
         {
             InitializeComponent();
+            var webService = kernel.Get<WebService>();
+            var validator = kernel.Get<Validator>();
+            _webService = webService;
 
             dgEmails.Loaded += (s, e) =>
             {
-                var connect = kernel.Get<EmailRegistrationWebService.WebService>();
-                var ItemsSource = connect.GetAllEmails();
-                dgEmails.ItemsSource = ItemsSource;
-                HeadTable();
+                if(btnAllEmails.IsChecked == true)
+                {
+                    var ItemsSource = _webService.GetAllEmails();
+                    dgEmails.ItemsSource = ItemsSource;
+                    DataGridCol();
+                }
+            };
+
+            btnAllEmails.Click += (s, e) =>
+            {
+                txtSerchId.Visibility = Visibility.Hidden;
+                UpdateData();
+            };
+
+            btnSerchId.Click += (s, e) =>
+            {
+                txtSerchId.Visibility = Visibility.Visible;
+            };
+
+            txtSerchId.TextChanged += (s, e) =>
+            {
+                if (validator.CheckStringEmpty(txtSerchId))
+                {
+                    List<Email> listE = new List<Email>();
+                    listE.Add(webService.GetEmailInId(Convert.ToInt32(txtSerchId.Text)));
+                    dgEmails.ItemsSource = listE;
+                    DataGridCol();
+                }
             };
 
             btnClose.Click += (s, e) =>
             {
                 this.Close();
             };
+
+            btnCanlse.Click += (s, e) =>
+            {
+                gridEdit.Visibility = Visibility.Hidden;
+
+                btnSaveChanges.Visibility = Visibility.Hidden;
+                btnCanlse.Visibility = Visibility.Hidden;
+                btnClose.Visibility = Visibility.Visible;
+            };
+
+            btnSaveChanges.Click += (s, e) =>
+            {
+                var connect = webService.SaveChangeEmail(Convert.ToInt32(txtEmailId.Text), txtEmailName.Text, dpEmailRegistrationDate.DisplayDate, txtEmailTo.Text, txtEmailFrom.Text, txtEmailTag.Text, txtEmailContent.Text);
+                if (connect > 0)
+                {
+                    MessageBox.Show("Сообщение изменено!");
+                    gridEdit.Visibility = Visibility.Hidden;
+
+                    btnSaveChanges.Visibility = Visibility.Hidden;
+                    btnCanlse.Visibility = Visibility.Hidden;
+                    btnClose.Visibility = Visibility.Visible;
+
+                    UpdateData();
+                }
+            };
+
         }
-        public void HeadTable()
+
+        private void UpdateData()
+        {
+            var ItemsSource = _webService.GetAllEmails();
+            dgEmails.ItemsSource = ItemsSource;
+        }
+
+        private void DataGridCol()
         {
             dgEmails.Columns[0].Header = "Id";
             dgEmails.Columns[1].Header = "Название";
@@ -54,13 +121,36 @@ namespace EmailRegistrationUi.Views
 
                 var fc = col.GetCellContent(item.Item);
                 var currentIem = dgEmails.CurrentItem;
-                var currentCol = dgEmails.CurrentColumn;
 
-                if (fc is TextBlock)
-                {
-                    var a = (fc as TextBlock).Text;
-                }
+                gridEdit.Visibility = Visibility.Visible;
+
+                txtEmailId.Text = ((Email)currentIem).EmailId.ToString();
+                txtEmailName.Text = ((Email)currentIem).EmailName.ToString();
+                dpEmailRegistrationDate.SelectedDate = ((Email)currentIem).EmailRegistrationDate;
+                txtEmailTo.Text = ((Email)currentIem).EmailTo.ToString();
+                txtEmailFrom.Text = ((Email)currentIem).EmailFrom.ToString();
+                txtEmailTag.Text = ((Email)currentIem).EmailTag.ToString();
+                txtEmailContent.Text = ((Email)currentIem).EmailContent.ToString();
+
+                btnSaveChanges.Visibility = Visibility.Visible;
+                btnCanlse.Visibility = Visibility.Visible;
+                btnClose.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void txtSerchId_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            string inputSymbol = e.Text.ToString();
+
+            if (!Regex.Match(inputSymbol, @"[0-9]").Success)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSerchId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

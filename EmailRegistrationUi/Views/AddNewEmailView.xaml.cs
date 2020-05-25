@@ -1,4 +1,5 @@
-﻿using EmailRegistrationUi.Services.Validator;
+﻿using EmailRegistrationUi.EmailRegistrationWebService;
+using EmailRegistrationUi.Services.Validator;
 using Ninject;
 using System.Windows;
 
@@ -10,7 +11,7 @@ namespace EmailRegistrationUi.Views
         {
             InitializeComponent();
             var EmailRegistrationDate = dpEmailRegistrationDate.DisplayDate.Date;
-            EmailRegistrationWebService.WebService webService = new EmailRegistrationWebService.WebService();
+            var webService = kernel.Get<WebService>();
 
             btnClose.Click += (s, e) =>
             {

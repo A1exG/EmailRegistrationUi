@@ -118,6 +118,26 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SaveChangeEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="emailId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="emailRegistrationDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailTo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailFrom" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailTag" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailContent" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveChangeEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaveChangeEmailResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="AddNewEmailSoapIn">
@@ -162,6 +182,12 @@
   <wsdl:message name="GetEmailTagSoapOut">
     <wsdl:part name="parameters" element="tns:GetEmailTagResponse" />
   </wsdl:message>
+  <wsdl:message name="SaveChangeEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveChangeEmail" />
+  </wsdl:message>
+  <wsdl:message name="SaveChangeEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveChangeEmailResponse" />
+  </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
     <wsdl:operation name="AddNewEmail">
       <wsdl:input message="tns:AddNewEmailSoapIn" />
@@ -190,6 +216,10 @@
     <wsdl:operation name="GetEmailTag">
       <wsdl:input message="tns:GetEmailTagSoapIn" />
       <wsdl:output message="tns:GetEmailTagSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveChangeEmail">
+      <wsdl:input message="tns:SaveChangeEmailSoapIn" />
+      <wsdl:output message="tns:SaveChangeEmailSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -257,6 +287,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SaveChangeEmail">
+      <soap:operation soapAction="http://microsoft.com/webservices/SaveChangeEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -316,6 +355,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetEmailTag">
       <soap12:operation soapAction="http://microsoft.com/webservices/GetEmailTag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveChangeEmail">
+      <soap12:operation soapAction="http://microsoft.com/webservices/SaveChangeEmail" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -34,13 +34,6 @@ namespace EmailRegistrationUi.Views
                 saev.Owner = this;
                 saev.ShowDialog();
             };
-
-            btnShowEmailInId.Click += (s, e) =>
-            {
-                ShowEmailInIdView seiv = new ShowEmailInIdView(kernel);
-                seiv.Owner = this;
-                seiv.ShowDialog();
-            };
         }
     }
 }
