@@ -8,7 +8,7 @@ namespace EmailRegistrationUi.Views
 {
     public partial class MainWindowView : Window
     {
-        public MainWindowView(IKernel kernel, WebService _webService, EmailValidator _validator, Logger _logger)
+        public MainWindowView(WebService _webService, EmailValidator _validator, Logger _logger)
         {
             InitializeComponent();
             
@@ -16,7 +16,7 @@ namespace EmailRegistrationUi.Views
             // Открывает окно регистрации нового письма
             btnAddNewEmail.Click += (s, e) =>
             {
-                AddNewEmailView anev = new AddNewEmailView(kernel, _webService, _validator, _logger);
+                AddNewEmailView anev = new AddNewEmailView(_webService, _validator, _logger);
                 anev.Owner = this;
                 anev.ShowDialog();
             };
@@ -25,7 +25,7 @@ namespace EmailRegistrationUi.Views
             // Открывает окно для отображения писем
             btnShowAllEmail.Click += (s, e) =>
             {
-                ShowAllEmailView saev = new ShowAllEmailView(kernel, _webService, _validator, _logger);
+                ShowAllEmailView saev = new ShowAllEmailView(_webService, _validator, _logger);
                 saev.Owner = this;
                 saev.ShowDialog();
             };

@@ -27,7 +27,7 @@ namespace EmailRegistrationUi
 		{
 			InitDependence();
 
-			MainWindowView mwv = new MainWindowView(kernel, _webService, _validator, _logger);
+			MainWindowView mwv = new MainWindowView(_webService, _validator, _logger);
 			mwv.Show();
 			mwv.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 

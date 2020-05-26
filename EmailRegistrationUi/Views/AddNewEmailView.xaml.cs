@@ -9,7 +9,7 @@ namespace EmailRegistrationUi.Views
 {
     public partial class AddNewEmailView : Window
     {
-        public AddNewEmailView(IKernel kernel, WebService _webService, EmailValidator _validator, Logger _logger)
+        public AddNewEmailView(WebService _webService, EmailValidator _validator, Logger _logger)
         {
             InitializeComponent();
 

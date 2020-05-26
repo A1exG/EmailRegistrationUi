@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace EmailRegistrationUi.Views
@@ -15,7 +14,7 @@ namespace EmailRegistrationUi.Views
     public partial class ShowAllEmailView : Window
     {
         private WebService webService;
-        public ShowAllEmailView(IKernel kernel, WebService _webService, EmailValidator _validator, Logger _logger)
+        public ShowAllEmailView(WebService _webService, EmailValidator _validator, Logger _logger)
         {
             InitializeComponent();
             webService = _webService;
@@ -49,11 +48,12 @@ namespace EmailRegistrationUi.Views
             // Обработчик события изменения Id в строке поиска и отображение результата в dataGrid
             txtSerchId.TextChanged += (s, e) =>
             {
-                if (txtSerchId.Text != null)
+                if (txtSerchId.Text != "")
                 {
-                    List<Email> listE = new List<Email>();
-                    listE.Add(webService.GetByID(Convert.ToInt32(txtSerchId.Text)));
-                    dgEmails.ItemsSource = listE;
+                    List<Email> elist = new List<Email>();
+                    var email = webService.GetByID(Convert.ToInt32(txtSerchId.Text));
+                    elist.Add(email);
+                    dgEmails.ItemsSource = elist;
                     DataGridCol();
                 }
             };
