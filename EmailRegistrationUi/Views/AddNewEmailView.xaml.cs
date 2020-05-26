@@ -1,7 +1,6 @@
 ﻿using EmailRegistrationUi.EmailRegistrationWebService;
 using EmailRegistrationUi.Services.Validator;
 using FluentValidation.Results;
-using Ninject;
 using NLog;
 using System.Windows;
 
