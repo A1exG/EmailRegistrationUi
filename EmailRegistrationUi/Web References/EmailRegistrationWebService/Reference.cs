@@ -364,7 +364,7 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://microsoft.com/webservices/")]
     public partial class Email {
         
-        private int emailIdField;
+        private int idField;
         
         private string emailNameField;
         
@@ -379,12 +379,12 @@ namespace EmailRegistrationUi.EmailRegistrationWebService {
         private string emailContentField;
         
         /// <remarks/>
-        public int EmailId {
+        public int Id {
             get {
-                return this.emailIdField;
+                return this.idField;
             }
             set {
-                this.emailIdField = value;
+                this.idField = value;
             }
         }
         

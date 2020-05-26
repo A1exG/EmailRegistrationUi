@@ -79,7 +79,7 @@ namespace EmailRegistrationUi.Views
             btnSaveChanges.Click += (s, e) =>
             {
                 Email email = new Email();
-                email.EmailId =Convert.ToInt32(txtEmailId.Text);
+                email.Id =Convert.ToInt32(txtEmailId.Text);
                 email.EmailName = txtEmailName.Text;
                 email.EmailRegistrationDate = dpEmailRegistrationDate.DisplayDate;
                 email.EmailTo = txtEmailTo.Text;
@@ -146,7 +146,7 @@ namespace EmailRegistrationUi.Views
 
                 gridEdit.Visibility = Visibility.Visible;
 
-                txtEmailId.Text = ((Email)currentIem).EmailId.ToString();
+                txtEmailId.Text = ((Email)currentIem).Id.ToString();
                 txtEmailName.Text = ((Email)currentIem).EmailName.ToString();
                 dpEmailRegistrationDate.SelectedDate = ((Email)currentIem).EmailRegistrationDate;
                 txtEmailTo.Text = ((Email)currentIem).EmailTo.ToString();
