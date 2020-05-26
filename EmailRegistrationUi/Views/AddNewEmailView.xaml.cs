@@ -42,6 +42,7 @@ namespace EmailRegistrationUi.Views
                     {
                         _logger.Error("Property " + failure.PropertyName + " failed validation.Error was: " + failure.ErrorMessage);
                     }
+                    MessageBox.Show("Заполните все поля");
                 }
             };
         }

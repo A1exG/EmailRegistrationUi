@@ -7,12 +7,12 @@ namespace EmailRegistrationUi.Services.Validator
     {
         public EmailValidator()
         {
-            RuleFor(Email => Email.EmailName).NotNull();
-            RuleFor(Email => Email.EmailRegistrationDate).NotNull();
-            RuleFor(Email => Email.EmailTo).NotNull();
-            RuleFor(Email => Email.EmailFrom).NotNull();
-            RuleFor(Email => Email.EmailTag).NotNull();
-            RuleFor(Email => Email.EmailContent).NotNull();
+            RuleFor(Email => Email.EmailName).NotEmpty();
+            RuleFor(Email => Email.EmailRegistrationDate).NotEmpty();
+            RuleFor(Email => Email.EmailTo).NotEmpty();
+            RuleFor(Email => Email.EmailFrom).NotEmpty();
+            RuleFor(Email => Email.EmailTag).NotEmpty();
+            RuleFor(Email => Email.EmailContent).NotEmpty();
         }
     }
 }
